@@ -37,29 +37,42 @@
                       <th style="width: 10px">#</th>
                       <th>Name</th>
                       <th>Slugs</th>
-                      <th>Post Count</th>
-                      <th style="width: 40px">Action</th>
-                      
+                      <th>Description</th>
+                      <th class="text-center" colspan="3" style="width: 40px">Action</th>
                     </tr>
                   </thead>
+                  @if($categories)
                   <tbody>
+                    @foreach($categories as $data)
                     <tr>
-                      <td>1.</td>
-                      <td>Update software</td>
+                      <td>{{++$i}}</td>
+                      <td>{{$data->name}}</td>
                       <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                        <div">
+                          <div>{{$data->slug}}</div>
                         </div>
                       </td>
-                      <td></td>
-                      <td><span class="badge bg-danger">55%</span></td>
+                      <td>{{ Str::words($data->description,15) }}</td>
+                      <td><a class="btn btn-sm btn-primary" href="{{$data->id}}">Show</a></td>
+                      <td><a class="btn btn-sm btn-info" href="{{$data->id}}">Edit</a></td>
+                      <td><a class="btn btn-sm btn-danger" href="{{$data->id}}">Delete</td>
                     </tr>
-                    
+                    @endforeach
                   </tbody>
+                  @endif
                 </table>
+                
               </div>
               <!-- /.card-body -->
             </div>
+          </div>
+
+          
+        </div>
+
+        <div class="d-flex ">
+          <div class=" m-auto">
+                {!! $categories->links() !!}
           </div>
         </div>
       </div>

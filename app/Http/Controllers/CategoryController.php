@@ -14,7 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-       return view('admin.category.index');
+        $i=1;
+        $categories = Category::latest()->paginate(7);
+        return view('admin.category.index',compact('categories','i'))->with('i',(request()->input('page',1)-1)*7);
     }
 
     /**
@@ -35,12 +37,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        //validation
         $request->validate([
             'title' => 'required|unique:categories,name|max:255',
         ]);
 
         $Category = new Category;
-
         $Category->name = $request->title;
         $Category->slug = Str::slug($request->title);
         $Category->description = $request->description;
@@ -58,7 +60,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        
     }
 
     /**
