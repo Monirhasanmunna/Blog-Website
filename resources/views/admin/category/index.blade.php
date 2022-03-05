@@ -62,7 +62,6 @@
                           <i  class=" fas fa-trash"></i>
                         </button>
                       </form>
-                      <a class="btn btn-sm btn-info mr-2" href="{{route('category.edit',[$data->id])}}"><i  class=" fas fa-eye"></i></a>
                       </td>
                     </tr>
                     @endforeach
