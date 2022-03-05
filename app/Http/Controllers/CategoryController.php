@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+
 
 class CategoryController extends Controller
 {
@@ -48,7 +50,11 @@ class CategoryController extends Controller
         $Category->description = $request->description;
         $Category->save();
 
-        return back()->with('status','Your Categories Added Successfully');
+        Session::flash('success','Categories Added Successfully');
+
+        return redirect()->back();
+
+        
 
     }
 
@@ -71,7 +77,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        
+        return view('admin.category.edit',compact('category'));
+        
     }
 
     /**
@@ -83,7 +91,19 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'title' => "required|unique:categories,name,$category->name|max:255",
+        ]);
+
+        
+        $category->name = $request->title;
+        $category->slug = Str::slug($request->title);
+        $category->description = $request->description;
+        $category->save();
+
+        Session::flash('success','Categories Updated Successfully');
+
+        return redirect()->back();
     }
 
     /**
@@ -94,6 +114,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        if($category){
+            $category->delete();
+            Session::flash('success','Category Deleted Successfully');
+            return redirect()->back();
+        }
     }
 }

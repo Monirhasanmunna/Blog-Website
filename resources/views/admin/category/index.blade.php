@@ -37,8 +37,8 @@
                       <th style="width: 10px">#</th>
                       <th>Name</th>
                       <th>Slugs</th>
-                      <th>Description</th>
-                      <th class="text-center" colspan="3" style="width: 40px">Action</th>
+                      <th>Post Count</th>
+                      <th class="text-center"  style="width: 40px">Action</th>
                     </tr>
                   </thead>
                   @if($categories)
@@ -52,10 +52,18 @@
                           <div>{{$data->slug}}</div>
                         </div>
                       </td>
-                      <td>{{ Str::words($data->description,15) }}</td>
-                      <td><a class="btn btn-sm btn-primary" href="{{$data->id}}">Show</a></td>
-                      <td><a class="btn btn-sm btn-info" href="{{$data->id}}">Edit</a></td>
-                      <td><a class="btn btn-sm btn-danger" href="{{$data->id}}">Delete</td>
+                      <td>{{ $data->id }}</td>
+                      <td class="d-flex justify-content-end" >
+                      <a class="btn btn-sm btn-primary mr-2" href="{{route('category.edit',[$data->id])}}"><i  class=" fas fa-edit"></i></a>
+                      <form method="POST" action="{{ route('category.destroy', [$data->id]) }}" class="mr-2">
+                        @csrf
+                       @method('Delete')
+                        <button type="submit" class="btn btn-sm btn-danger btn-icon">
+                          <i  class=" fas fa-trash"></i>
+                        </button>
+                      </form>
+                      <a class="btn btn-sm btn-info mr-2" href="{{route('category.edit',[$data->id])}}"><i  class=" fas fa-eye"></i></a>
+                      </td>
                     </tr>
                     @endforeach
                   </tbody>

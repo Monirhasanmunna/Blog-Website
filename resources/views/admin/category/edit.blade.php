@@ -5,13 +5,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Create Category</h1>
+            <h1 class="m-0 text-dark">Edit Category</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
               <li class="breadcrumb-item active"><a href="{{route('category.index')}}">Category List</a></li>
-              <li class="breadcrumb-item active">Create Category</li>
+              <li class="breadcrumb-item active">Edit Category</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -26,14 +26,15 @@
               <div class="card-header">
                  
                   <div class="d-flex justify-content-between text-center">
-                    <h5 class="">Category Create</h5>
+                    <h5 class="">Edit: {{$category->name}} Category</h5>
                     <a class="btn btn-primary" href="{{route('category.index')}}">Back to Category List</a>
                   </div>
               </div>
               <!-- /.card-header -->
              <div class="col-lg-6 col-md-6 col-s-8 m-auto">
                  
-                <form action="{{route('category.store')}}" method="POST">
+                <form action="{{route('category.update',[$category->id])}}" method="POST">
+                    @method('PUT')
                     
                     @csrf
                     <div class="card-body">
@@ -49,15 +50,15 @@
                         
                        <div class="form-group">
                          <label for="title">Category Name</label>
-                         <input type="text" class="form-control" id="title" name="title">
+                         <input type="text" class="form-control" id="title" name="title" value="{{$category->name}}">
                        </div>
 
                        <div class="form-group">
                         <label for="description">Category Description</label>
-                        <textarea type="text" class="form-control" rows="8" id="title" name="description"></textarea>
+                        <textarea type="text" class="form-control" rows="8" id="title" name="description">{{$category->description}}</textarea>
                       </div>
 
-                       <button type="submit" class="btn btn-lg btn-primary">Submit</button>
+                       <button type="submit" class="btn btn-lg btn-primary">Update</button>
 
                      </div>
                    </form>
