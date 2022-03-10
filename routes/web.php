@@ -31,11 +31,8 @@ Route::get('/contact',function(){
 
 Route::group(['prefix' => 'admin','middleware' => ['auth'] ], function () {
 
-    Route::get('/demo',function(){
-        return view('admin.dashboard.home');
-    });
-
     Route::resource('category','CategoryController');
+    Route::resource('tag','TagsController');
 }); 
 
 

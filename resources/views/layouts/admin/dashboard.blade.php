@@ -180,8 +180,15 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{route('category.index')}}" class="nav-link">
-                  <i class="nav-icon fas fa-tags"></i>
+                  <i class="nav-icon fas fa-list"></i>
                   <p>Category List</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{route('tag.index')}}" class="nav-link">
+                  <i class="nav-icon fas fa-tags"></i>
+                  <p>Tag List</p>
                 </a>
               </li>
             </ul>
