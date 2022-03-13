@@ -191,6 +191,13 @@
                   <p>Tag List</p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="{{route('post.index')}}" class="nav-link">
+                  <i class="nav-icon fas fa-tags"></i>
+                  <p>Post List</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
@@ -250,11 +257,18 @@
 <script src="{{asset('admin')}}/js/adminlte.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-@if (session()->has('success'))
+
 <script>
+  @if (session()->has('success'))
     toastr.success("{!! session()->get('success')!!}");
+  @endif
+
+
+$(document).ready(function () {
+  bsCustomFileInput.init()
+}) 
 </script>
-    
-@endif
+ 
+
 </body>
 </html>
