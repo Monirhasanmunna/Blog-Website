@@ -263,10 +263,10 @@
     toastr.success("{!! session()->get('success')!!}");
   @endif
 
-
 $(document).ready(function () {
   bsCustomFileInput.init()
-}) 
+})
+
 </script>
  
 

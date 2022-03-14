@@ -43,23 +43,23 @@
                     </tr>
                   </thead>
                   @if($post)
-                  <tbody>
+                  <tbody >
                     @if($post->Count())
                     @foreach($post as $data)
                     <tr>
-                      <td>{{++$i}}</td>
-                      <td>{{$data->image}}</td>
-                      <td>
+                      <td class="align-middle">{{++$i}}</td>
+                      <td class="align-middle"><img class="img-thumbnail" style="width: 60px;" src="{{asset('uploads/'.$data->image)}}" alt=""></td>
+                      <td class="align-middle">
                         <div">
                           <div>{{$data->title}}</div>
                         </div>
                       </td>
-                      <td>{{ $data->category }}</td>
-                      <td>{{ $data->author }}</td>
-                      <td class="d-flex justify-content-end" >
-                      <a class="btn btn-sm btn-primary mr-2" href="{{route('post.edit',[$data->id])}}"><i  class=" fas fa-edit"></i></a>
-                      <form method="POST" action="{{ route('post.destroy', [$data->id]) }}" class="mr-2">
-                        @csrf
+                      <td class="align-middle">{{ $data->category->name }}</td>
+                      <td class="align-middle">{{ $data->user->name }}</td>
+                      <td class="  d-flex justify-content-end" >
+                      <a class="btn btn-sm btn-primary mr-2 " href="{{route('post.edit',[$data->id])}}"><i  class=" fas fa-edit"></i></a>
+                      <form method="POST" action="{{ route('post.destroy', [$data->id]) }}" class="mr-2 ">
+                      @csrf
                        @method('Delete')
                         <button type="submit" class="btn btn-sm btn-danger btn-icon">
                           <i  class=" fas fa-trash"></i>

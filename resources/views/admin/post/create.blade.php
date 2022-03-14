@@ -33,7 +33,7 @@
               <!-- /.card-header -->
              <div class="col-lg-6 col-md-6 col-s-8 m-auto">
                  
-                <form action="{{route('post.store')}}" method="POST">
+                <form action="{{route('post.store')}}" method="POST" enctype="multipart/form-data">
                     
                     @csrf
                     <div class="card-body">
@@ -49,7 +49,7 @@
                         
                        <div class="form-group">
                          <label for="title">Post Title</label>
-                         <input type="text" class="form-control" id="title" name="title">
+                         <input type="text" class="form-control" id="title" value="{{old('title')}}" name="title">
                        </div>
 
                        <label for="category">Post Title</label>
@@ -67,13 +67,10 @@
                               <label class="custom-file-label" for="image">Choose file</label>
                             </div>
                           </div>
-                        
-                        
-
-
+           
                        <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea type="text" class="form-control" rows="8" id="title" name="description"></textarea>
+                        <textarea type="text" class="form-control" rows="8" id="title" name="description">{{old('description')}}</textarea>
                       </div>
 
                        <button type="submit" class="btn btn-lg btn-primary">Submit</button>

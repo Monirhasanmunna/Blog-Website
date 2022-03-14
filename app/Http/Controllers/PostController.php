@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
+
 
 class PostController extends Controller
 {
@@ -39,7 +43,36 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+    // image validation //
+    $request->validate([
+        'title' => 'required|unique:posts,title|max:255',
+        'description' => 'required',
+        'image' => 'required|image',
+        ]);
+    
+        $imageName = '';
+        if($request->image){
+        $imageName= time().'.'.$request->file('image')->getClientOriginalExtension();
+        $request->image->move(public_path('uploads'),$imageName);
+        }
+
         
+    
+        // data store to database //
+        $post = new Post;
+        $post->title = $request->title;
+        $post->slug = Str::slug($request->title);
+        $post->image = $imageName;
+        $post->description = $request->description;
+        $post->category_id = $request->category;
+        $post->user_id = Auth()->user()->id;
+        $post->published_at = Carbon::now();
+        $post->save();
+
+        Session::flash('success','Post Create Successfully');
+
+        return redirect()->back();
+
     }
 
     /**
@@ -61,7 +94,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        
+        $category=Category::all();
+        return view('admin.post.edit',compact('post','category'));
     }
 
     /**
@@ -73,7 +108,32 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'title' => 'required|unique:posts,title|max:255',
+            'description' => 'required',
+            'image' => 'required|image',
+            ]);
+        
+            $imageName = '';
+            if($request->image){
+            $imageName= time().'.'.$request->file('image')->getClientOriginalExtension();
+            $request->image->move(public_path('uploads'),$imageName);
+            }
+    
+            
+            // data update to database //
+            $post->title = $request->title;
+            $post->slug = Str::slug($request->title);
+            $post->image = $imageName;
+            $post->description = $request->description;
+            $post->category_id = $request->category;
+            $post->user_id = Auth()->user()->id;
+            $post->published_at = Carbon::now();
+            $post->save();
+    
+            Session::flash('success','Post Updated Successfully');
+    
+            return redirect()->back();
     }
 
     /**
@@ -84,6 +144,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        Session::flash('success','Post Deleted Successfully');
+
+        return redirect()->back();
     }
 }
