@@ -52,7 +52,7 @@
                          <input type="text" class="form-control" id="title" value="{{old('title')}}" name="title">
                        </div>
 
-                       <label for="category">Post Title</label>
+                       <label for="category">Category</label>
                         <select class="form-control" id="category" name="category">
                           <option selected hidden>Select Option</option>
                           @foreach($category as $data)
@@ -60,14 +60,22 @@
                           @endforeach
                         </select>
                        
-                        
-                          <div class="form-group">
-                            <div class="custom-file mt-4 mb-3">
-                              <input type="file" class="custom-file-input" id="image" name="image">
-                              <label class="custom-file-label" for="image">Choose file</label>
-                            </div>
+                        <div class="form-group">
+                          <div class="custom-file mt-4 mb-3">
+                            <input type="file" class="custom-file-input" id="image" name="image">
+                            <label class="custom-file-label" for="image">Choose file</label>
                           </div>
-           
+                        </div>
+
+                        @foreach($tags as $tag)
+                        <div class="form-group">
+                          <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" name="tags[]" type="checkbox" id="tag{{$tag->id}}" value="{{$tag->id}}">
+                          <label for="tag{{$tag->id}}" class="custom-control-label">{{$tag->name}}</label>
+                          </div>
+                        </div>
+                        @endforeach
+
                        <div class="form-group">
                         <label for="description">Description</label>
                         <textarea type="text" class="form-control" rows="8" id="title" name="description">{{old('description')}}</textarea>

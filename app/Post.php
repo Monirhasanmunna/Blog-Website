@@ -9,12 +9,9 @@ class Post extends Model
     protected $guarded=['created_at','updated_at'];
 
     protected $date=[
-
         'published_at',
-
     ];
-
-
+   
     public function category()
     {
         return $this->belongsTo('App\Category');
@@ -23,5 +20,10 @@ class Post extends Model
     public function User()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function tag()
+    {
+        return $this->belongsToMany('App\Tag');
     }
 }

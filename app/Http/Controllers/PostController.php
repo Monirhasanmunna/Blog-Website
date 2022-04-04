@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Tag;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -20,6 +21,7 @@ class PostController extends Controller
     public function index()
     {
         $i=1;
+        
         $post = Post::latest()->paginate(7);
         return view('admin.post.index',compact('post','i'))->with('i',(request()->input('page',1)-1)*7);
     }
@@ -31,8 +33,9 @@ class PostController extends Controller
      */
     public function create()
     {
+        $tags = Tag::all();
         $category=Category::all();
-        return view('admin.post.create',compact('category'));
+        return view('admin.post.create',compact(['category','tags']));
     }
 
     /**
@@ -43,6 +46,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
+
     // image validation //
     $request->validate([
         'title' => 'required|unique:posts,title|max:255',
@@ -55,9 +60,7 @@ class PostController extends Controller
         $imageName= time().'.'.$request->file('image')->getClientOriginalExtension();
         $request->image->move(public_path('uploads'),$imageName);
         }
-
-        
-    
+       
         // data store to database //
         $post = new Post;
         $post->title = $request->title;
@@ -68,7 +71,7 @@ class PostController extends Controller
         $post->user_id = Auth()->user()->id;
         $post->published_at = Carbon::now();
         $post->save();
-
+        $post->tag()->attach($request->tags);
         Session::flash('success','Post Create Successfully');
 
         return redirect()->back();
@@ -94,9 +97,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        
+        $tags = Tag::all();
         $category=Category::all();
-        return view('admin.post.edit',compact('post','category'));
+        return view('admin.post.edit',compact(['post','category','tags']));
     }
 
     /**
@@ -109,7 +112,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $request->validate([
-            'title' => 'required|unique:posts,title|max:255',
+            'title' => 'required|max:255',
             'description' => 'required',
             'image' => 'required|image',
             ]);
@@ -130,6 +133,7 @@ class PostController extends Controller
             $post->user_id = Auth()->user()->id;
             $post->published_at = Carbon::now();
             $post->save();
+            $post->tag()->sync($request->tags);
     
             Session::flash('success','Post Updated Successfully');
     

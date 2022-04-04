@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Tags;
+use App\Tag;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -18,7 +18,7 @@ class TagsController extends Controller
     public function index()
     {
         $i=1;
-        $tags = Tags::latest()->paginate(7);
+        $tags = Tag::latest()->paginate(7);
         return view('admin.tags.index',compact('tags','i'))->with('i',(request()->input('page',1)-1)*7);
     }
 
@@ -45,7 +45,7 @@ class TagsController extends Controller
             'title' => 'required|unique:Tags,name|max:255',
         ]);
 
-        $tag = new Tags;
+        $tag = new Tag;
         $tag->name = $request->title;
         $tag->slug = Str::slug($request->title);
         $tag->description = $request->description;
@@ -62,7 +62,7 @@ class TagsController extends Controller
      * @param  \App\Tags  $tags
      * @return \Illuminate\Http\Response
      */
-    public function show(Tags $tags)
+    public function show(Tag $tags)
     {
         //
     }
@@ -73,7 +73,7 @@ class TagsController extends Controller
      * @param  \App\Tags  $tags
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tags $tag)
+    public function edit(Tag $tag)
     {
         return view('admin.tags.edit',compact('tag'));
     }
@@ -85,7 +85,7 @@ class TagsController extends Controller
      * @param  \App\Tags  $tags
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tags $tag)
+    public function update(Request $request, Tag $tag)
     {
         $request->validate([
             'title' => 'required|unique:Tags,name|max:255',
@@ -107,7 +107,7 @@ class TagsController extends Controller
      * @param  \App\Tags  $tags
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tags $tag)
+    public function destroy(Tag $tag)
     {
         $tag->delete();
 

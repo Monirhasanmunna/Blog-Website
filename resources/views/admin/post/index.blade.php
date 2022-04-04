@@ -38,6 +38,7 @@
                       <th>Image</th>
                       <th>Title</th>
                       <th>Category</th>
+                      <th>Tags</th>
                       <th>Author</th>
                       <th class="text-center"  style="width: 40px">Action</th>
                     </tr>
@@ -50,11 +51,16 @@
                       <td class="align-middle">{{++$i}}</td>
                       <td class="align-middle"><img class="img-thumbnail" style="width: 60px;" src="{{asset('uploads/'.$data->image)}}" alt=""></td>
                       <td class="align-middle">
-                        <div">
+                        <div>
                           <div>{{$data->title}}</div>
                         </div>
                       </td>
                       <td class="align-middle">{{ $data->category->name }}</td>
+                      <td>
+                        @foreach($data->tag as $tag)
+                        <span class="badge badge-primary">{{$tag->name}}</span>
+                        @endforeach
+                      </td>
                       <td class="align-middle">{{ $data->user->name }}</td>
                       <td class="  d-flex justify-content-end" >
                       <a class="btn btn-sm btn-primary mr-2 " href="{{route('post.edit',[$data->id])}}"><i  class=" fas fa-edit"></i></a>

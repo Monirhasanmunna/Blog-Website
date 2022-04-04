@@ -69,6 +69,22 @@
                            </div>
                          </div>
 
+                         @foreach($tags as $tag)
+                        <div class="form-group">
+                          <div class="custom-control custom-checkbox">
+                          <input class="custom-control-input" name="tags[]" type="checkbox" id="tag{{$tag->id}}" value="{{$tag->id}}" 
+                          
+                          @foreach ($post->tag as $t)
+                              @if ($tag->id == $t->id) checked @endif
+                          @endforeach
+                          >
+                          <label for="tag{{$tag->id}}" class="custom-control-label">{{$tag->name}}</label>
+                          </div>
+                        </div>
+                        @endforeach
+
+
+
                        <div class="form-group">
                         <label for="description">Post Description</label>
                         <textarea type="text" class="form-control" rows="8" id="title" name="description">{{$post->description}}</textarea>
