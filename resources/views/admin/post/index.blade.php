@@ -49,7 +49,7 @@
                     @foreach($post as $data)
                     <tr>
                       <td class="align-middle">{{++$i}}</td>
-                      <td class="align-middle"><img class="img-thumbnail" style="width: 60px;" src="{{asset('uploads/'.$data->image)}}" alt=""></td>
+                      <td class="align-middle"><img class="bordered img-fluid" style="width: 60px;" src="{{asset('uploads/'.$data->image)}}" alt=""></td>
                       <td class="align-middle">
                         <div>
                           <div>{{$data->title}}</div>
@@ -63,6 +63,7 @@
                       </td>
                       <td class="align-middle">{{ $data->user->name }}</td>
                       <td class="  d-flex justify-content-end" >
+                      <a class="btn btn-sm btn-primary mr-2 " href="{{route('post.show',[$data->id])}}"><i  class=" fas fa-eye"></i></a>
                       <a class="btn btn-sm btn-primary mr-2 " href="{{route('post.edit',[$data->id])}}"><i  class=" fas fa-edit"></i></a>
                       <form method="POST" action="{{ route('post.destroy', [$data->id]) }}" class="mr-2 ">
                       @csrf

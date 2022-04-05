@@ -53,6 +53,7 @@ class PostController extends Controller
         'title' => 'required|unique:posts,title|max:255',
         'description' => 'required',
         'image' => 'required|image',
+        'tags' => 'required',
         ]);
     
         $imageName = '';
@@ -72,6 +73,7 @@ class PostController extends Controller
         $post->published_at = Carbon::now();
         $post->save();
         $post->tag()->attach($request->tags);
+    
         Session::flash('success','Post Create Successfully');
 
         return redirect()->back();
@@ -86,7 +88,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('admin.post.show',compact('post'));
     }
 
     /**

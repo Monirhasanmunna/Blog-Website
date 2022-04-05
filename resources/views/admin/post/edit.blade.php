@@ -31,7 +31,7 @@
                   </div>
               </div>
               <!-- /.card-header -->
-             <div class="col-lg-6 col-md-6 col-s-8 m-auto">
+             <div class="col-lg-9 col-md-12 col-s-12 m-auto">
                  
                 <form action="{{route('post.update',[$post->id])}}" method="POST" enctype="multipart/form-data">
                     @method('PUT')
@@ -87,7 +87,7 @@
 
                        <div class="form-group">
                         <label for="description">Post Description</label>
-                        <textarea type="text" class="form-control" rows="8" id="title" name="description">{{$post->description}}</textarea>
+                        <textarea type="text" class="form-control" rows="8" id="description" name="description">{{$post->description}}</textarea>
                       </div>
 
                        <button type="submit" class="btn btn-lg btn-primary">Update</button>
@@ -102,3 +102,18 @@
       </div>
     </div>
 @endsection    
+
+@section('style')
+    <link rel="stylesheet" href="{{asset('admin/css/summernote-bs4.css')}}">
+@endsection
+
+@section('script')
+    <script src="{{asset('admin/js/summernote-bs4.js')}}"></script>
+    <script>
+      $('#description').summernote({
+        placeholder: 'Write Description Here',
+        tabsize: 2,
+        height: 300
+      });
+    </script>
+@endsection
