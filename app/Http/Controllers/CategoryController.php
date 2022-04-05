@@ -17,8 +17,8 @@ class CategoryController extends Controller
     public function index()
     {
         $i=1;
-        $categories = Category::latest()->paginate(7);
-        return view('admin.category.index',compact('categories','i'))->with('i',(request()->input('page',1)-1)*7);
+        $categories = Category::latest()->paginate(15);
+        return view('admin.category.index',compact('categories','i'))->with('i',(request()->input('page',1)-1)*15);
     }
 
     /**

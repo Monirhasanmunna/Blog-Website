@@ -22,8 +22,8 @@ class PostController extends Controller
     {
         $i=1;
         
-        $post = Post::latest()->paginate(7);
-        return view('admin.post.index',compact('post','i'))->with('i',(request()->input('page',1)-1)*7);
+        $post = Post::latest()->paginate(15);
+        return view('admin.post.index',compact('post','i'))->with('i',(request()->input('page',1)-1)*15);
     }
 
     /**

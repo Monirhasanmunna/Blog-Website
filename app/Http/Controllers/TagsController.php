@@ -18,8 +18,8 @@ class TagsController extends Controller
     public function index()
     {
         $i=1;
-        $tags = Tag::latest()->paginate(7);
-        return view('admin.tags.index',compact('tags','i'))->with('i',(request()->input('page',1)-1)*7);
+        $tags = Tag::latest()->paginate(15);
+        return view('admin.tags.index',compact('tags','i'))->with('i',(request()->input('page',1)-1)*15);
     }
 
     /**
