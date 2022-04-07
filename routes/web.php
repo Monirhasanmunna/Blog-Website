@@ -4,31 +4,18 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-Route::get('/',function(){
-    return view('website.home');
-});
-
-
-Route::get('/category',function(){
-    return view('website.category');
-});
-
-Route::get('/post',function(){
-    return view('website.post');
-});
-
-Route::get('/contact',function(){
-    return view('website.contact');
-});
-
+//frontend route
+Route::get('/','frontendController@home')->name('website');
+Route::get('/category','frontendController@category')->name('website');
+Route::get('/post','frontendController@post')->name('website');
+Route::get('/contact','frontendController@contact')->name('website');
 
 // admin routes   
-
 Route::group(['prefix' => 'admin','middleware' => ['auth'] ], function () {
 
     Route::resource('category','CategoryController');
@@ -37,6 +24,19 @@ Route::group(['prefix' => 'admin','middleware' => ['auth'] ], function () {
 
 }); 
 
+//Factory tinker dummy image
+Route::get('/test',function(){
+
+    $posts = App\Post::all();
+    $id = 200;
+    foreach($posts as $post){
+        $post->image = "https://picsum.photos/id/".$id."/600/400";
+        $post->save();
+        $id++;
+    }
+    return $post;
+
+});
 
 
 

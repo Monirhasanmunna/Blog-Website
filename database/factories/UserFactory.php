@@ -41,10 +41,12 @@ $factory->define(Category::class, function (Faker $faker) {
 
 //Post Factory
 $factory->define(Post::class, function (Faker $faker) {
+    $id = rand(30,300);
+    $image = "https://1.picsum.photos/id/".$id."/640/480.jpg";
     return [
         'title' => $faker->sentence(),
         'slug' => Str::slug($faker->word()),
-        'image' => $faker->imageUrl(600,400),
+        'image' => $image,
         'description' => $faker->text(400),
         'category_id' => factory('App\Category')->create()->id,
         'user_id' => 1,
