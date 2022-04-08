@@ -11,9 +11,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //frontend route
 Route::get('/','frontendController@home')->name('website');
-Route::get('/category','frontendController@category')->name('website');
-Route::get('/post','frontendController@post')->name('website');
-Route::get('/contact','frontendController@contact')->name('website');
+Route::get('/category','frontendController@category')->name('website.category');
+Route::get('/post','frontendController@post')->name('website.post');
+Route::get('/contact','frontendController@contact')->name('website.contact');
 
 // admin routes   
 Route::group(['prefix' => 'admin','middleware' => ['auth'] ], function () {

@@ -202,13 +202,17 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link btn btn-danger text-left text-white">
+            <a href="#" class="nav-link btn text-left text-white">
               <i  class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Logout
               </p>
             </a>
           </li>
+        </ul>
+        
+        <ul class="m-auto ">
+          <li><a href="{{route('website')}}" class="btn btn-primary mt-5 text-center text-white" target="blank">Website</a></li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
