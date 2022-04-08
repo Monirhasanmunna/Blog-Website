@@ -18,9 +18,10 @@ class frontendController extends Controller
         return view('website.category');
     }
 
-    public function post()
+    public function post($slug)
     {
-        return view('website.post');
+        $postDetails = Post::where('slug',$slug)->first();        
+        return view('website.post',compact('postDetails'));
     }
 
     public function contact()

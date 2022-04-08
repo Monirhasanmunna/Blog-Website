@@ -12,7 +12,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //frontend route
 Route::get('/','frontendController@home')->name('website');
 Route::get('/category','frontendController@category')->name('website.category');
-Route::get('/post','frontendController@post')->name('website.post');
+Route::get('/post/{slug}','frontendController@post')->name('website.post');
 Route::get('/contact','frontendController@contact')->name('website.contact');
 
 // admin routes   
