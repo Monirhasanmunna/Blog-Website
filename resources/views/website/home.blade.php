@@ -66,19 +66,19 @@
           @foreach ($posts as $post)
           <div class="col-lg-4 mb-4">
             <div class="entry2">
-              <a href="single.html"><img src="{{$post->image}}" alt="Image" class="img-fluid rounded"></a>
+              <a href="{{route('website.post',[$post->slug])}}"><img src="{{$post->image}}" alt="Image" class="img-fluid rounded"></a>
               <div class="excerpt">
               <span class="post-category text-white bg-secondary mb-3">{{$post->category->name}}</span>
 
-              <h2><a href="single.html">{{$post->title}}</a></h2>
+              <h2><a href="{{route('website.post',[$post->slug])}}">{{$post->title}}</a></h2>
               <div class="post-meta align-items-center text-left clearfix">
                 <figure class="author-figure mb-0 mr-3 float-left"><img src="{{asset('website')}}/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
-                <span class="d-inline-block mt-1">By <a href="#">{{$post->user->name}}</a></span>
-                <span>&nbsp;-&nbsp; July 19, 2019</span>
+                <span class="d-inline-block mt-1">By <a href="{{route('website.post',[$post->slug])}}">{{$post->user->name}}</a></span>
+                <span>&nbsp;-&nbsp; {{date_format($post->created_at,'M d Y')}}</span>
               </div>
               
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo sunt tempora dolor laudantium sed optio, explicabo ad deleniti impedit facilis fugit recusandae! Illo, aliquid, dicta beatae quia porro id est.</p>
-                <p><a href="#">Read More</a></p>
+                <p>{{Str::words($post->description,40)}}</p>
+                <p><a href="{{route('website.post',[$post->slug])}}">Read More</a></p>
               </div>
             </div>
           </div>

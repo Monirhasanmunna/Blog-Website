@@ -7,12 +7,12 @@
         <div class="row same-height justify-content-center">
           <div class="col-md-12 col-lg-10">
             <div class="post-entry text-center">
-              <span class="post-category text-white bg-success mb-3">Nature</span>
-              <h1 class="mb-4"><a href="#">The AI magically removes moving objects from videos.</a></h1>
+              <span class="post-category text-white bg-success mb-3">{{$post->category->name}}</span>
+              <h1 class="mb-4"><a href="#">{{$post->title}}</a></h1>
               <div class="post-meta align-items-center text-center">
                 <figure class="author-figure mb-0 mr-3 d-inline-block"><img src="{{asset('website')}}/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
-                <span class="d-inline-block mt-1">By Carrol Atkinson</span>
-                <span>&nbsp;-&nbsp; February 10, 2019</span>
+                <span class="d-inline-block mt-1">{{$post->user->name}}</span>
+                <span>&nbsp;-&nbsp;{{date_format($post->created_at,'M d Y')}}</span>
               </div>
             </div>
           </div>
@@ -28,9 +28,8 @@
           <div class="col-md-12 col-lg-8 main-content">
             
             <div class="post-content-body">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium nam quas inventore, ut iure iste modi eos adipisci ad ea itaque labore earum autem nobis et numquam, minima eius. Nam eius, non unde ut aut sunt eveniet rerum repellendus porro.</p>
-            <p>Sint ab voluptates itaque, ipsum porro qui obcaecati cumque quas sit vel. Voluptatum provident id quis quo. Eveniet maiores perferendis officia veniam est laborum, expedita fuga doloribus natus repellendus dolorem ab similique sint eius cupiditate necessitatibus, magni nesciunt ex eos.</p>
-            <p>Quis eius aspernatur, eaque culpa cumque reiciendis, nobis at earum assumenda similique ut? Aperiam vel aut, ex exercitationem eos consequuntur eaque culpa totam, deserunt, aspernatur quae eveniet hic provident ullam tempora error repudiandae sapiente illum rerum itaque voluptatem. Commodi, sequi.</p>
+             
+            <p>{{$post->description}}</p>
             <div class="row mb-5 mt-5">
               <div class="col-md-12 mb-4">
                 <img src="{{asset('website')}}/images/img_1.jpg" alt="Image placeholder" class="img-fluid rounded">

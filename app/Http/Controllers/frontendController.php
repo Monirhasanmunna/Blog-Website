@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class frontendController extends Controller
 {
@@ -20,8 +21,14 @@ class frontendController extends Controller
 
     public function post($slug)
     {
-        $postDetails = Post::where('slug',$slug)->first();        
-        return view('website.post',compact('postDetails'));
+        
+        $post = Post::where('slug',$slug)->first();
+        if($post){
+            return view('website.post',compact('post'));
+        }else{
+            return redirect('/');
+        }     
+        
     }
 
     public function contact()
