@@ -199,6 +199,13 @@
                   <p>Post List</p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="{{route('user.index')}}" class="nav-link">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>User List</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">

@@ -49,7 +49,7 @@ $factory->define(Post::class, function (Faker $faker) {
         'image' => $image,
         'description' => $faker->text(400),
         'category_id' => factory('App\Category')->create()->id,
-        'user_id' => 1,
+        'user_id' => 2,
     ];
         
 });
