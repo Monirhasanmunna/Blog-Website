@@ -18,10 +18,11 @@ Route::get('/contact','frontendController@contact')->name('website.contact');
 // admin routes   
 Route::group(['prefix' => 'admin','middleware' => ['auth'] ], function () {
 
-    Route::resource('category','CategoryController');
-    Route::resource('tag','TagsController');
-    Route::resource('post','PostController');
-    Route::resource('user','UserController');
+    Route::resource('/category','CategoryController');
+    Route::resource('/tag','TagsController');
+    Route::resource('/post','PostController');
+    Route::resource('/user','UserController');
+    Route::get('/profile','UserController@profile')->name('user.profile');
 
 }); 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 
@@ -100,13 +101,11 @@ class UserController extends Controller
      */
     public function update(Request $request,$id)
     {
-        
-       
 
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'email'=>'required|email',
-            'image'=>'required|image|mimes:jpeg,web,png',
+            'image'=>'sometimes|nullable|image|mimes:jpeg,web,png',
             'description'=>'required|max:1000',
             'password'=>'sometimes|nullable|min:8',
 
@@ -118,10 +117,13 @@ class UserController extends Controller
         $request->image->move(public_path('uploads'),$imageName);
         }
 
+        
         $user = User::find($id);
+        if($imageName){
+            $user->image = $imageName;
+        }
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->image = $imageName;
         $user->description = $request->description;
         $user->slug = Str::slug($request->name);
         $user->password = bcrypt($request->password);
@@ -142,5 +144,11 @@ class UserController extends Controller
         Session::flash('success','User Deleted Successfully');
         return redirect()->back();
 
+    }
+
+    public function profile()
+    {
+        $user=Auth()->user(); 
+        return view('admin.user.profile',compact('user'));
     }
 }

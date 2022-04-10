@@ -64,17 +64,6 @@
                           <label class="custom-file-label" for="image">Choose file</label>
                         </div>
                       </div>
-
-                       <div class="form-group">
-                        <label for="description">User Description</label>
-                        <textarea type="text" class="form-control" rows="8" id="description" name="description">{{$user->description}}</textarea>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password">
-                      </div>
-
                        <button type="submit" class="btn btn-lg btn-primary">Update</button>
 
                      </div>
