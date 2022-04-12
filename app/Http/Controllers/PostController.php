@@ -149,9 +149,15 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post->delete();
-        Session::flash('success','Post Deleted Successfully');
+       $posts=Post::where('id',$post->id)->first();
+       $delete=$post->delete();
+       $path = public_path('uploads/'.$posts->image);
 
-        return redirect()->back();
+        if($delete){
+            unlink($path);
+            Session::flash('success','Post Deleted Successfully');
+            return redirect()->back();
+        }
+        
     }
 }
