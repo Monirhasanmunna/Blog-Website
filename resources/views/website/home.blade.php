@@ -61,7 +61,7 @@
 
               <h2><a href="{{route('website.post',[$post->slug])}}">{{$post->title}}</a></h2>
               <div class="post-meta align-items-center text-left clearfix">
-                <figure class="author-figure mb-0 mr-3 float-left"><img src="{{asset('uploads/'.$post->user->image)}}" alt="Image" class="img-fluid"></figure>
+                <figure class="author-figure mb-0 mr-3 float-left"><img src="@if($post->user->image){{asset('uploads/'.$post->user->image)}}@else{{asset('uploads/user.png')}}@endif" alt="Image" class="img-fluid"></figure>
                 <span class="d-inline-block mt-1">By <a href="{{route('website.post',[$post->slug])}}">
                   @if($post->user)
                   {{$post->user->name}}
