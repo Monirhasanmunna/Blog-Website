@@ -212,7 +212,7 @@
           <li class="nav-header">Your Account</li>
           <li class="nav-item">
             <a href="{{route('user.profile')}}" class="nav-link btn text-left text-white">
-              <i  class="nav-icon far fa-user"></i>
+              <i class="nav-icon far fa-user"></i>
               <p>
                 Your Profile
               </p>

@@ -55,7 +55,7 @@
                           <div>{{$data->title}}</div>
                         </div>
                       </td>
-                      <td class="align-middle">{{ $data->category->name }}</td>
+                      <td class="align-middle">{{$data->category->name}}</td>
                       <td>
                         @foreach($data->tag as $tag)
                         <span class="badge badge-primary">{{$tag->name}}</span>
@@ -81,7 +81,7 @@
                     @endforeach
                     @else
                     <tr>
-                      <td colspan="6" class="text-center"><h5>No Post Found</h5></td>
+                      <td colspan="7" class="text-center"><h5>No Post Found</h5></td>
                     </tr>
                     @endif
                   </tbody>

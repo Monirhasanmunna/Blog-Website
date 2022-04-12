@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use App\Category;
+use Illuminate\Support\Facades\View;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -30,7 +32,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $categories = Category::take(5)->get();
+
+        view()->share('categories', $categories);
 
         parent::boot();
     }

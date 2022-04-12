@@ -115,7 +115,7 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'required',
-            'image' => 'required|image',
+            'image' => 'sometimes|nullable|image',
             ]);
         
             $imageName = '';
